@@ -1,22 +1,12 @@
-name: Cypress Test
-
-on:
-  push:
-    branches:
-      - main
-
+name: End-to-end tests
+on: push
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
+  cypress-run:
+    runs-on: ubuntu-22.04
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Run Cypress tests
-        run: |
-          npx cypress install
-          npx cypress run --spec "cypress/e2e/spec.cy.js"
+      - name: Checkout
+        uses: actions/checkout@v3
+      # Install npm dependencies, cache them correctly
+      # and run all Cypress tests
+      - name: Cypress run
+        uses: cypress-io/github-action@v5
